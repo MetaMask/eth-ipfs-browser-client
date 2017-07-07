@@ -1,3 +1,6 @@
 [submodule "ipfs-eth-bridge"]
 	path = ipfs-eth-bridge
 	url = git@github.com:kumavis/ipfs-eth-bridge.git
+[submodule "metamask-mesh"]
+	path = metamask-mesh
+	url = git@github.com:kumavis/metamask-mesh.git
