@@ -1,1 +1,5 @@
 /dns4/fox.musteka.la/tcp/443/wss/ipfs/Qmc7etyUd9tEa3ZBD3LCTMDL96qcMi8cKfHEiLt5nhVdVC
+/dns4/bat.musteka.la/tcp/443/wss/QmPaBC5Lmfj7vctVxRPcKvfZds9Zk96dgjgthvg4Dgf7at
+/dns4/monkey.musteka.la/tcp/443/wss/QmZDfxSycZxaaYyrCyHdNEiip3wmxTgriPzEYETEn9Z6K3
+/dns4/panda.musteka.la/tcp/443/wss/QmUGARsthjG4EJBCrYzkuCESjn5G2akmmuawKPbZrFM3E5
+/dns4/tiger.musteka.la/tcp/443/wss/QmXFdPj3FuVpkgmNHNTFitkp4DSmVuF6HxNX6tCZr4LFz9
