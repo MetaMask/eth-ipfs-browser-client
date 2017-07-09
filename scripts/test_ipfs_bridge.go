@@ -4,20 +4,24 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/ipfs/go-ipfs/core"
-	config "github.com/ipfs/go-ipfs/repo/config"
+	core "github.com/ipfs/go-ipfs/core"
+	commands "github.com/ipfs/go-ipfs/core/commands"
 	fsrepo "github.com/ipfs/go-ipfs/repo/fsrepo"
 )
 
 func main() {
-	// We don't want the node to discover nor connecting
-	// other peers more than the one we are giving
-	config.DefaultBootstrapAddresses = []string{}
 
 	r, err := fsrepo.Open("~/.ipfs")
 	if err != nil {
 		panic(err)
 	}
+
+	// Remove bootstrap nodes
+	repoConfig, err := r.Config()
+	if err != nil {
+		panic(err)
+	}
+	repoConfig.Bootstrap = []string{}
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
@@ -32,7 +36,13 @@ func main() {
 	}
 
 	// DEBUG
-	fmt.Printf("%v\n", nd)
+	addr, peer, err := commands.ParsePeerParam("/dns4/tiger.musteka.la/tcp/443/wss/QmXFdPj3FuVpkgmNHNTFitkp4DSmVuF6HxNX6tCZr4LFz9")
+	if err != nil {
+		panic(err)
+	}
+	_ = nd
+	fmt.Printf("---> %v\n-----> %v\n", addr, peer)
+	//nd.P2P.Dial()
 	// DEBUG
 
 	// DEBUG
