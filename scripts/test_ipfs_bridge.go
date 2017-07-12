@@ -2,50 +2,66 @@ package main
 
 import (
 	"context"
+	"crypto/rand"
 	"fmt"
+	"strings"
+
+	pstore "gx/ipfs/QmXZSd1qR5BxZkPyuwfT5jpqQFScZccoZvDneXsKzCNHWX/go-libp2p-peerstore"
+	ma "gx/ipfs/QmcyqRMCAXVtYPS4DiBrA7sezL9rRGfW8Ctx7cywL4TXJj/go-multiaddr"
 
 	core "github.com/ipfs/go-ipfs/core"
-	commands "github.com/ipfs/go-ipfs/core/commands"
-	fsrepo "github.com/ipfs/go-ipfs/repo/fsrepo"
+	config "github.com/ipfs/go-ipfs/repo/config"
+	iaddr "github.com/ipfs/go-ipfs/thirdparty/ipfsaddr"
 )
 
 func main() {
-
-	r, err := fsrepo.Open("~/.ipfs")
-	if err != nil {
-		panic(err)
-	}
-
-	// Remove bootstrap nodes
-	repoConfig, err := r.Config()
-	if err != nil {
-		panic(err)
-	}
-	repoConfig.Bootstrap = []string{}
-
+	// Context
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	cfg := &core.BuildCfg{
-		Repo:   r,
-		Online: true,
+		NilRepo: true,
+		Online:  true,
+		ExtraOpts: map[string]bool{
+			"mplex": true,
+		},
 	}
 
-	nd, err := core.NewNode(ctx, cfg)
+	// Remove the hardcoded bootstrap nodes
+	config.DefaultBootstrapAddresses = []string{}
+
+	// The new IPFS Node
+	node, err := core.NewNode(ctx, cfg)
 	if err != nil {
 		panic(err)
 	}
 
-	// DEBUG
-	addr, peer, err := commands.ParsePeerParam("/dns4/tiger.musteka.la/tcp/443/wss/QmXFdPj3FuVpkgmNHNTFitkp4DSmVuF6HxNX6tCZr4LFz9")
+	a, err := iaddr.ParseString("/ip4/52.176.89.220/tcp/4001/ipfs/Qmc7etyUd9tEa3ZBD3LCTMDL96qcMi8cKfHEiLt5nhVdVC")
 	if err != nil {
 		panic(err)
 	}
-	_ = nd
-	fmt.Printf("---> %v\n-----> %v\n", addr, peer)
-	//nd.P2P.Dial()
-	// DEBUG
+	pi := pstore.PeerInfo{
+		ID:    a.ID(),
+		Addrs: []ma.Multiaddr{a.Transport()},
+	}
+
+	output := "connect " + pi.ID.Pretty()
+	err = node.PeerHost.Connect(ctx, pi)
+	if err != nil {
+		fmt.Printf("%s failure: %s\n", output, err)
+	} else {
+		fmt.Printf("success")
+	}
 
 	// DEBUG
+	// Keep it running!
 	select {}
 	// DEBUG
+}
+
+func random8ByteString() string {
+	a := make([]byte, 8)
+	if _, err := rand.Read(a); err != nil {
+		panic(err)
+	}
+	return strings.ToLower(fmt.Sprintf("%X", a))
 }
