@@ -7,11 +7,10 @@ import (
 	"strings"
 
 	pstore "gx/ipfs/QmXZSd1qR5BxZkPyuwfT5jpqQFScZccoZvDneXsKzCNHWX/go-libp2p-peerstore"
+	config "gx/ipfs/QmXmrMgvGsobiWUEfvtS87oeQwRviCp2g9JD6uKea3Fo5m/go-ipfs/repo/config"
+	iaddr "gx/ipfs/QmXmrMgvGsobiWUEfvtS87oeQwRviCp2g9JD6uKea3Fo5m/go-ipfs/thirdparty/ipfsaddr"
+	core "gx/ipfs/QmXmrMgvGsobiWUEfvtS87oeQwRviCp2g9JD6uKea3Fo5mi/go-ipfs/core"
 	ma "gx/ipfs/QmcyqRMCAXVtYPS4DiBrA7sezL9rRGfW8Ctx7cywL4TXJj/go-multiaddr"
-
-	core "github.com/ipfs/go-ipfs/core"
-	config "github.com/ipfs/go-ipfs/repo/config"
-	iaddr "github.com/ipfs/go-ipfs/thirdparty/ipfsaddr"
 )
 
 func main() {
