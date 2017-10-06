@@ -4,3 +4,4 @@
 /ip4/52.231.196.251/tcp/4001/ipfs/QmUGARsthjG4EJBCrYzkuCESjn5G2akmmuawKPbZrFM3E5
 /ip4/52.232.121.251/tcp/4001/ipfs/QmXFdPj3FuVpkgmNHNTFitkp4DSmVuF6HxNX6tCZr4LFz9
 /ip4/52.179.142.174/tcp/4001/ipfs/QmVxnfnLc6DqeyZHFCZYWfSRCc2wmNg8bhXbc7JPmoBJ6Q
+/ip4/40.123.45.125/tcp/4001/ipfs/QmatBCsefxDCi1fZf2UZswU7f3kuRSxKHzsV1WReishbJK
